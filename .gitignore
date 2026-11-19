@@ -1,0 +1,6 @@
+praktikum1_26_V1 (1).pdf*
+# build output & data
+build/
+build-tests/
+mnist_test.csv
+*:Zone.Identifier
