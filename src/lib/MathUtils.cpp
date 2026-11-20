@@ -17,12 +17,8 @@ std::vector<double> encodeAsOneHot(double value, std::size_t numClasses) {
 }
 
 double dotProduct(const std::vector<double>& a, const std::vector<double>& b) {
-    if (a.size() != b.size()) {
-        throw std::invalid_argument("dotProduct: vectors have different sizes");
-    }
-
     double result = 0.0;
-    for (std::size_t i = 0; i < a.size(); ++i) {
+    for (std::size_t i = 0; i < std::min(a.size(),b.size()); ++i) {
         result += a[i] * b[i];
     }
     return result;
