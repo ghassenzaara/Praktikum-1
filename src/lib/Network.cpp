@@ -69,8 +69,17 @@ void Network::trainBatch(const std::vector<std::vector<double>>& inputs, const s
     if (ownedLossFunction==nullptr){
         throw std::logic_error("ownedLossFunction is not set");
     }
-    if (inputs.empty() || actualOutputs.empty() || inputs.size()!=actualOutputs.size() || batchSize==0){
-        throw std::invalid_argument("one or many arguments are invalid or incompatible with laye size");
+    if (inputs.empty()){
+        throw std::invalid_argument("trainBatch: inputs is empty");
+    }
+    if (actualOutputs.empty()){
+        throw std::invalid_argument("trainBatch: actualOutputs is empty");
+    }
+    if (inputs.size()!=actualOutputs.size()){
+        throw std::invalid_argument("trainBatch: inputs and actualOutputs have different numbers of samples");
+    }
+    if (batchSize==0){
+        throw std::invalid_argument("trainBatch: batchSize must be greater than 0");
     }
     costHistory.clear();
     accuracyHistory.clear();
@@ -101,8 +110,14 @@ double Network::computeAccuracy(const std::vector<std::vector<double>>& inputs, 
     if (ownedLossFunction==nullptr){
         throw std::logic_error("ownedLossFunction is not set");
     }
-    if (inputs.empty() || actualOutputs.empty() ||  inputs.size()!=actualOutputs.size()){
-        throw std::invalid_argument("one or many arguments are invalid or incompatible with laye size");
+    if (inputs.empty()){
+        throw std::invalid_argument("computeAccuracy: inputs is empty");
+    }
+    if (actualOutputs.empty()){
+        throw std::invalid_argument("computeAccuracy: actualOutputs is empty");
+    }
+    if (inputs.size()!=actualOutputs.size()){
+        throw std::invalid_argument("computeAccuracy: inputs and actualOutputs have different numbers of samples");
     }
     double totalCorrect=0;
     for (std::size_t i=0; i<inputs.size(); i++){
